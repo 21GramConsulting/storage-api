@@ -1,0 +1,17 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "artifact/lib",
+    "lib": [
+      "dom"
+    ]
+  },
+  "include": [
+    "src/main/**/*.ts",
+    "test/unit/**/*.ts",
+    "test/component/**/*.ts",
+    "test/integration/**/*.ts",
+    "test/system/**/*.ts"
+  ]
+}

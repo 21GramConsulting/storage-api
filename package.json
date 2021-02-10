@@ -1,0 +1,52 @@
+{
+  "name": "@21gram-consulting/storage-api",
+  "version": "1.0.0",
+  "description": "A Library providing creative uses of the native Storage interface API.",
+  "scripts": {
+    "test-unit": "nyc --temp-dir 'artifact/.nyc_output/unit' mocha -r ts-node/register 'src/test/unit/**/*.ts'",
+    "test-unit-report-lcov": "nyc report --reporter=lcov --temp-dir 'artifact/.nyc_output/unit' --report-dir=artifact/test/unit",
+    "test": "npm run test-unit",
+    "test-report-lcov": "npm run test-unit-report-lcov",
+    "prepare": "npm run clean && npm run compile && npm run test && npm run document",
+    "pretest": "npm run compile",
+    "posttest": "npm run test-report-lcov && rm -rf artifact/.nyc_output",
+    "document": "typedoc src/main --out docs --name \"21Gram Consulting's Storage API\" --includeVersion --categorizeByGroup false --out artifact/doc",
+    "clean": "rm -rf artifact",
+    "compile": "tsc",
+    "fix": "gts fix"
+  },
+  "author": {
+    "name": "Adam Laszlo Rocska",
+    "url": "https://21gram.consulting/about-us/adam-rocska",
+    "email": "adam.rocska@21gram.consulting"
+  },
+  "contributors": [
+    {
+      "name": "Ronald Legmann",
+      "url": "https://21gram.consulting/about-us/ronald-legmann",
+      "email": "ronald.legmann@21gram.consulting"
+    },
+    {
+      "name": "Tamas Farago",
+      "email": "tamas.farago@21gram.hu"
+    }
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^14.14.25",
+    "@types/mocha": "^8.2.0",
+    "@types/chai": "^4.2.14",
+    "@types/sinon": "^9.0.10",
+    "gts": "^3.1.0",
+    "typescript": "^4.1.4",
+    "mocha": "^8.2.1",
+    "chai": "^4.3.0",
+    "sinon": "^9.2.4",
+    "ts-node": "^9.1.1",
+    "nyc": "^15.1.0",
+    "typedoc": "^0.20.23",
+    "type2docfx": "^0.11.2",
+    "typedoc-umlclass": "^0.3.2",
+    "typedoc-plantuml": "^1.4.1"
+  }
+}

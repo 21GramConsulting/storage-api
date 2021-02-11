@@ -95,4 +95,36 @@ describe(`NamespacedStorage`, () => {
     });
   });
 
+  describe('#create', () => {
+    const relatedNamespace = 'test';
+    const unrelatedNamespace = 'whatsoever';
+    const testKeys = ['key', 'testKey', 'whatever'];
+    const relatedTestKeys = testKeys.map(testKey => `${relatedNamespace}.${testKey}`);
+    const unrelatedTestKeys = testKeys.map(testKey => `${unrelatedNamespace}.${testKey}`);
+
+    const fakeStorage = (storage: Storage, keysInStorage: Array<string>) => {
+      sinon.stub(storage, 'length').get(() => keysInStorage.length);
+      sinon.stub(storage, 'key').callsFake(index => keysInStorage[index]);
+      sinon.stub(storage, 'getItem').callsFake(key => keysInStorage.includes(key) ? key : null);
+    }
+
+    const testReadRelatedKeysFromParentStorage = (keysInRootStorage: Array<string>, expectedRelatedKeys: Array<string>) => {
+      fakeStorage(stubStorage, keysInRootStorage);
+
+      const unitUnderTest = NamespacedStorage.create(stubStorage, relatedNamespace);
+      assert.equal(unitUnderTest.length, expectedRelatedKeys.length);
+      const indexOfFirstLetterWithoutNamespace = relatedNamespace.length + 1; // `test.`.length
+      expectedRelatedKeys.forEach(testKey => assert.exists(unitUnderTest.getItem(testKey.substring(indexOfFirstLetterWithoutNamespace))));
+    }
+    it(`should read keys from 'parent' storage on instantiation`, () => {
+      testReadRelatedKeysFromParentStorage(relatedTestKeys, relatedTestKeys);
+    });
+    it(`should read zero keys, as there is no related key in parent storage`, () => {
+      testReadRelatedKeysFromParentStorage(unrelatedTestKeys, []);
+    });
+    it(`should read only those keys from 'parent' storage, which are related to its namespace`, () => {
+      const keysInParentStorage: Array<string> = [...relatedTestKeys, ...unrelatedTestKeys];
+      testReadRelatedKeysFromParentStorage(keysInParentStorage, relatedTestKeys);
+    });
+  });
 });

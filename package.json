@@ -11,6 +11,7 @@
   "type": "commonjs",
   "main": "artifact/lib/src/main/index.js",
   "types": "artifact/lib/src/main/index.d.ts",
+  "homepage": "https://21gramconsulting.github.io/storage-api/",
   "repository": {
     "type": "git",
     "url": "https://github.com/21GramConsulting/storage-api"

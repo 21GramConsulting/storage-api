@@ -1,6 +1,6 @@
 {
   "name": "@21gram-consulting/storage-api",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A Library providing creative uses of the native Storage interface API.",
   "keywords": [
     "storage",
@@ -11,6 +11,7 @@
   "type": "commonjs",
   "main": "artifact/lib/src/main/index.js",
   "types": "artifact/lib/src/main/index.d.ts",
+  "homepage": "https://21gramconsulting.github.io/storage-api/",
   "repository": {
     "type": "git",
     "url": "https://github.com/21GramConsulting/storage-api"

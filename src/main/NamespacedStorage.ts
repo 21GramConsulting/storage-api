@@ -151,7 +151,10 @@ export class NamespacedStorage implements Storage {
    * @since   1.0.0
    */
   public clear(): void {
-    this.keys.forEach(key => this.storage.removeItem(key));
+    this.keys.forEach(key => {
+      const namespacedKey = this.packNamespacedKey(key);
+      this.storage.removeItem(namespacedKey);
+    });
     this.keys = [];
   }
 
@@ -175,7 +178,7 @@ export class NamespacedStorage implements Storage {
    */
   public key(index: number): string | null {
     return index in this.keys
-      ? this.unpackNamespacedKey(this.keys[index])
+      ? this.keys[index]
       : null;
   }
 
@@ -188,7 +191,7 @@ export class NamespacedStorage implements Storage {
   public removeItem(key: string): void {
     const namespacedKey = this.packNamespacedKey(key);
     this.storage.removeItem(namespacedKey);
-    this.keys = this.keys.filter(key => key !== namespacedKey);
+    this.keys = this.keys.filter(currentKey => currentKey !== key);
   }
 
   /**
@@ -201,14 +204,7 @@ export class NamespacedStorage implements Storage {
   public setItem(key: string, value: string): void {
     const namespacedKey = this.packNamespacedKey(key);
     this.storage.setItem(namespacedKey, value);
-    if (!this.keys.includes(namespacedKey)) this.keys.push(namespacedKey);
-  }
-
-  private unpackNamespacedKey(key: string): string {
-    return key.replace(
-      new RegExp(`^${this.namespace}\\${NamespacedStorage.namespaceSeparator}`),
-      '',
-    );
+    if (!this.keys.includes(key)) this.keys.push(key);
   }
 
   private packNamespacedKey(key: string): string {

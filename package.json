@@ -2,8 +2,21 @@
   "name": "@21gram-consulting/storage-api",
   "version": "1.0.0",
   "description": "A Library providing creative uses of the native Storage interface API.",
+  "keywords": [
+    "storage",
+    "localstorage",
+    "sessionstorage",
+    "namespace"
+  ],
   "main": "artifact/lib/src/main/index.js",
   "types": "artifact/lib/src/main/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/21GramConsulting/storage-api"
+  },
+  "bugs": {
+    "url": "https://github.com/21GramConsulting/storage-api/issues"
+  },
   "scripts": {
     "test-unit": "nyc --temp-dir 'artifact/.nyc_output/unit' mocha -r ts-node/register 'src/test/unit/**/*.ts'",
     "test-unit-report-lcov": "nyc report --reporter=lcov --temp-dir 'artifact/.nyc_output/unit' --report-dir=artifact/test/unit",

@@ -1,6 +1,6 @@
 {
   "name": "@21gram-consulting/storage-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Library providing creative uses of the native Storage interface API.",
   "keywords": [
     "storage",
@@ -25,9 +25,9 @@
     "prepare": "npm run clean && npm run compile && npm run test && npm run document",
     "pretest": "npm run compile",
     "posttest": "npm run test-report-lcov && rm -rf artifact/.nyc_output",
-    "document": "typedoc --mode file --out docs --name \"21Gram Consulting's Storage API\" --includeVersion --categorizeByGroup false --out artifact/doc src/main/index.ts",
+    "document": "typedoc --out docs --name \"21Gram Consulting's Storage API\" --includeVersion --categorizeByGroup false --out artifact/doc src/main/index.ts",
     "clean": "rm -rf artifact",
-    "compile": "tsc --help",
+    "compile": "tsc",
     "fix": "gts fix"
   },
   "author": {

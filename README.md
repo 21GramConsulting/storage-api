@@ -17,3 +17,8 @@ The vision for this project is to provide as much Storage API utilities as
 possible in hope, that one day data models handled by JavaScript / TypeScript
 apps become flexible, and interchangeable without a framework or idiomatic BS
 lock-in.
+
+# API Docs
+
+We generate API docs using [TypeDoc](https://github.com/TypeStrong/typedoc).  
+[Click here](https://21gramconsulting.github.io/storage-api/) to access [21Gram Consulting's Storage API docs](https://21gramconsulting.github.io/storage-api/)

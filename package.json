@@ -27,7 +27,7 @@
     "posttest": "npm run test-report-lcov && rm -rf artifact/.nyc_output",
     "document": "typedoc --out docs --name \"21Gram Consulting's Storage API\" --includeVersion --categorizeByGroup false --out artifact/doc src/main/index.ts",
     "clean": "rm -rf artifact",
-    "compile": "tsc --help",
+    "compile": "tsc",
     "fix": "gts fix"
   },
   "author": {

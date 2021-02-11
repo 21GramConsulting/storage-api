@@ -8,6 +8,7 @@
     "sessionstorage",
     "namespace"
   ],
+  "type": "commonjs",
   "main": "artifact/lib/src/main/index.js",
   "types": "artifact/lib/src/main/index.d.ts",
   "repository": {

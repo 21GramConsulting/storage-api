@@ -1,0 +1,822 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>NamespacedStorage | 21Gram Consulting&#x27;s Storage API - v1.0.0</title>
+	<meta name="description" content="Documentation for 21Gram Consulting&#x27;s Storage API - v1.0.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">21Gram Consulting&#x27;s Storage API - v1.0.0</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">21Gram Consulting&#x27;s Storage API - v1.0.0</a>
+				</li>
+				<li>
+					<a href="namespacedstorage.html">NamespacedStorage</a>
+				</li>
+			</ul>
+			<h1>Class NamespacedStorage</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<a href="#summary" id="summary" style="color: inherit; text-decoration: none;">
+							<h1>Summary</h1>
+						</a>
+						<p>A utility unit designed to encapsulate any <code>Storage</code> implementation.</p>
+					</div>
+					<a href="#structure" id="structure" style="color: inherit; text-decoration: none;">
+						<h1>Structure</h1>
+					</a>
+					<p><img class="uml" src="../assets/images/uml1.png"></p>
+					<a href="#description" id="description" style="color: inherit; text-decoration: none;">
+						<h1>Description</h1>
+					</a>
+					<p>Designed and implemented to be in full, drop-in replacement compatibility with the native <code>Storage</code> API both
+						interface and behavior-wise, it empowers developers to create namespaced <code>Storage</code> scopes.
+						It allows you to subdivide <code>Storage</code> implementations into smaller groups of <code>Storage</code> units with reduced focus to
+					their smaller scope.</p>
+					<p>Due to its dependency on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy"><code>Proxy</code></a>,
+					instances may only be created via the factory method <code>#create</code>:</p>
+					<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">storage</span><span style="color: #000000">: </span><span style="color: #267F99">Storage</span><span style="color: #000000"> = </span><span style="color: #001080">NamespacedStorage</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">localStorage</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;example&#039;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">nestedStorage</span><span style="color: #000000">: </span><span style="color: #267F99">Storage</span><span style="color: #000000"> = </span><span style="color: #001080">NamespacedStorage</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">storage</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;nested&#039;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">deepestStorage</span><span style="color: #000000">: </span><span style="color: #267F99">Storage</span><span style="color: #000000"> = </span><span style="color: #001080">NamespacedStorage</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">storage</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;deepest&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+					<a href="#important-tip" id="important-tip" style="color: inherit; text-decoration: none;">
+						<h1>Important Tip</h1>
+					</a>
+					<p>Despite the contemporary trends with TypeScript on the UI or the Back-End, please, make sure to always depend on
+					interfaces instead of implementations. It will help you keep your software as dynamic and flexible as it can be.</p>
+					<p>Software is meant to be soft. Keep it that way.</p>
+					<a href="#perks" id="perks" style="color: inherit; text-decoration: none;">
+						<h1>Perks</h1>
+					</a>
+					<a href="#get-amp-set-items-aka-crud" id="get-amp-set-items-aka-crud" style="color: inherit; text-decoration: none;">
+						<h2>Get &amp; Set Items (AKA: CRUD)</h2>
+					</a>
+					<p>As per the official <a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage"><code>Storage</code> API</a>, it allows for IO
+					operations both via methods and properties. Take the following example:</p>
+					<a href="#the-following-lines-of-code-all-set-the-same-value-to-the-same-storage-unit" id="the-following-lines-of-code-all-set-the-same-value-to-the-same-storage-unit" style="color: inherit; text-decoration: none;">
+						<h3>The following lines of code all set the same value to the same storage unit</h3>
+					</a>
+					<pre><code class="language-typescript"><span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #001080">cool</span><span style="color: #000000">    = </span><span style="color: #A31515">&#039;It</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s awesome!&#039;</span><span style="color: #000000">;</span>
+<span style="color: #001080">storage</span><span style="color: #000000">[</span><span style="color: #A31515">&#039;cool&#039;</span><span style="color: #000000">] = </span><span style="color: #A31515">&#039;It</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s awesome!&#039;</span><span style="color: #000000">;</span>
+<span style="color: #001080">localStorage</span><span style="color: #000000">[</span><span style="color: #A31515">&#039;example.cool&#039;</span><span style="color: #000000">] = </span><span style="color: #A31515">&#039;It</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s awesome!&#039;</span><span style="color: #000000">;</span>
+<span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #795E26">setItem</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;cool&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;It</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s awesome!&#039;</span><span style="color: #000000">);</span>
+<span style="color: #001080">localStorage</span><span style="color: #000000">.</span><span style="color: #795E26">setItem</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;example.cool&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;It</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s awesome!&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+					<a href="#the-following-lines-of-code-all-return-the-same-value-written-to-the-same-storage-unit" id="the-following-lines-of-code-all-return-the-same-value-written-to-the-same-storage-unit" style="color: inherit; text-decoration: none;">
+						<h3>The following lines of code all return the same value written to the same storage unit</h3>
+					</a>
+					<pre><code class="language-typescript"><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #795E26">getItem</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;cool&#039;</span><span style="color: #000000">));</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #001080">cool</span><span style="color: #000000">);</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #001080">storage</span><span style="color: #000000">[</span><span style="color: #A31515">&#039;cool&#039;</span><span style="color: #000000">]);</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #001080">localStorage</span><span style="color: #000000">.</span><span style="color: #795E26">getItem</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;example.cool&#039;</span><span style="color: #000000">));</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #001080">localStorage</span><span style="color: #000000">[</span><span style="color: #A31515">&#039;example.cool&#039;</span><span style="color: #000000">]);</span>
+</code></pre>
+					<a href="#a-more-practical-example-for-property-accessors" id="a-more-practical-example-for-property-accessors" style="color: inherit; text-decoration: none;">
+						<h3>A more practical example for property accessors:</h3>
+					</a>
+					<pre><code class="language-typescript"><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">TodoItem</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">summary</span><span style="color: #000000">?: </span><span style="color: #267F99">string</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">priority</span><span style="color: #000000">?: </span><span style="color: #267F99">number</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">increasePriority</span><span style="color: #000000">(</span><span style="color: #001080">todoItem</span><span style="color: #000000">: </span><span style="color: #267F99">TodoItem</span><span style="color: #000000">): </span><span style="color: #267F99">void</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">todoItem</span><span style="color: #000000">.</span><span style="color: #001080">priority</span><span style="color: #000000"> = (</span><span style="color: #001080">todoItem</span><span style="color: #000000">.</span><span style="color: #001080">priority</span><span style="color: #000000"> ?? </span><span style="color: #098658">0</span><span style="color: #000000">) + </span><span style="color: #098658">1</span><span style="color: #000000">;</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">todos</span><span style="color: #000000">: </span><span style="color: #267F99">Storage</span><span style="color: #000000"> = </span><span style="color: #001080">NamespacedStorage</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">storage</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;todoItems&#039;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">todo</span><span style="color: #000000">: </span><span style="color: #267F99">Storage</span><span style="color: #000000"> &amp; </span><span style="color: #267F99">TodoItem</span><span style="color: #000000"> = </span><span style="color: #001080">NamespacedStorage</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">todos</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;item1&#039;</span><span style="color: #000000">);</span>
+<span style="color: #795E26">increasePriority</span><span style="color: #000000">(</span><span style="color: #001080">todo</span><span style="color: #000000">);</span>
+<span style="color: #795E26">increasePriority</span><span style="color: #000000">(</span><span style="color: #001080">todo</span><span style="color: #000000">);</span>
+<span style="color: #795E26">increasePriority</span><span style="color: #000000">(</span><span style="color: #001080">todo</span><span style="color: #000000">);</span>
+<span style="color: #008000">// returns String(&quot;3&quot;)</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #001080">localStorage</span><span style="color: #000000">.</span><span style="color: #795E26">getItem</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;example.todoItem.item1.priority&#039;</span><span style="color: #000000">));</span>
+</code></pre>
+					<a href="#scope-reduced-interactions" id="scope-reduced-interactions" style="color: inherit; text-decoration: none;">
+						<h2>Scope-Reduced interactions</h2>
+					</a>
+					<p>A namespaced storage will only execute its methods within its namespace. This implies, that the keys which belong a
+						specific namespace are strongly connected to the given instance. When running <code>clear</code>, <code>key</code>, or getting <code>length</code>,
+					it behaves as expected: all operations &amp; information is restricted to the namespace only.</p>
+					<dl class="tsd-comment-tags">
+						<dt>version</dt>
+						<dd><p>1.0.0</p>
+						</dd>
+						<dt>since</dt>
+						<dd><p>1.0.0</p>
+						</dd>
+						<dt>see</dt>
+						<dd><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">MDN Proxy Object</a></p>
+						</dd>
+						<dt>see</dt>
+						<dd><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage">MDN Storage Interface</a></p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy-diagram">
+                <h3>Hierarchy-Diagram</h3>
+                <a class="diagram" href="../assets/images/NamespacedStorage-umlClassDiagram-1.svg" title="Click to enlarge">
+                    <img src="../assets/images/NamespacedStorage-umlClassDiagram-1.svg"
+                            alt="UML class diagram of NamespacedStorage" />
+                </a>
+                <h4>Legend</h4>
+                      <div class="legend"><div>
+                           <span class="dt"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgY29udGVudFN0eWxlVHlwZT0idGV4dC9jc3MiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiIHpvb21BbmRQYW49Im1hZ25pZnkiIHdpZHRoPSIyM3B4IiBoZWlnaHQ9IjIzcHgiIHN0eWxlPSJ3aWR0aDoyM3B4O2hlaWdodDoyM3B4OyIgdmlld0JveD0iMCAwIDIzIDIzIj4NCjxnPg0KPGVsbGlwc2UgY3g9IjExLjUiIGN5PSIxMS41IiByeD0iMTEiIHJ5PSIxMSIgZmlsbD0iI0FERDFCMiIgc3R5bGU9InN0cm9rZTogI0E4MDAzNjsgc3Ryb2tlLXdpZHRoOiAxLjA7Ii8+DQo8dGV4dCB4PSI3IiB5PSIxMS41IiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCIgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9IkNvdXJpZXIiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSJib2xkIj5DPC90ZXh0Pg0KPC9nPg0KPC9zdmc+" alt="icon for a class in the UML class diagram" /></span>
+                           <span class="dd">class</span>
+                       </div><div>
+                               <span class="dt"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgY29udGVudFN0eWxlVHlwZT0idGV4dC9jc3MiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiIHpvb21BbmRQYW49Im1hZ25pZnkiIHdpZHRoPSI3cHgiIGhlaWdodD0iN3B4IiBzdHlsZT0id2lkdGg6N3B4O2hlaWdodDo3cHg7IiB2aWV3Qm94PSIwIDAgNyA3Ij4NCjxnPg0KPHJlY3QgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIGZpbGw9Im5vbmUiIHN0eWxlPSJzdHJva2U6ICNDODI5MzA7IHN0cm9rZS13aWR0aDogMS4wOyIvPg0KPC9nPg0KPC9zdmc+" alt="icon for a private property in the UML class diagram" /></span>
+                               <span class="dd">private property</span>
+                           </div><div>
+                               <span class="dt"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgY29udGVudFN0eWxlVHlwZT0idGV4dC9jc3MiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiIHpvb21BbmRQYW49Im1hZ25pZnkiIHdpZHRoPSI3cHgiIGhlaWdodD0iN3B4IiBzdHlsZT0id2lkdGg6N3B4O2hlaWdodDo3cHg7IiB2aWV3Qm94PSIwIDAgNyA3Ij4NCjxnPg0KPGVsbGlwc2UgY3g9IjMuNSIgY3k9IjMuNSIgcng9IjMiIHJ5PSIzIiBmaWxsPSIjODRCRTg0IiBzdHlsZT0ic3Ryb2tlOiAjMDM4MDQ4OyBzdHJva2Utd2lkdGg6IDEuMDsiLz4NCjwvZz4NCjwvc3ZnPg==" alt="icon for a public method in the UML class diagram" /></span>
+                               <span class="dd">public method</span>
+                           </div><div>
+                               <span class="dt"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgY29udGVudFN0eWxlVHlwZT0idGV4dC9jc3MiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiIHpvb21BbmRQYW49Im1hZ25pZnkiIHdpZHRoPSI3cHgiIGhlaWdodD0iN3B4IiBzdHlsZT0id2lkdGg6N3B4O2hlaWdodDo3cHg7IiB2aWV3Qm94PSIwIDAgNyA3Ij4NCjxnPg0KPHJlY3QgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIGZpbGw9IiNGMjRENUMiIHN0eWxlPSJzdHJva2U6ICNDODI5MzA7IHN0cm9rZS13aWR0aDogMS4wOyIvPg0KPC9nPg0KPC9zdmc+" alt="icon for a private method in the UML class diagram" /></span>
+                               <span class="dd">private method</span>
+                           </div><div>
+                           <span class="dt underlined">underlined</span>
+                           <span class="dd">static property/method</span>
+                       </div></div>
+            </section>
+<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">NamespacedStorage</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><span class="tsd-signature-type">Storage</span></li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-kind-class">
+				<h3 class="tsd-before-signature">Indexable</h3>
+				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>name: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">unknown</span></div>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<a href="#summary" id="summary" style="color: inherit; text-decoration: none;">
+							<h1>Summary</h1>
+						</a>
+						<p>A utility unit designed to encapsulate any <code>Storage</code> implementation.</p>
+					</div>
+					<a href="#structure" id="structure" style="color: inherit; text-decoration: none;">
+						<h1>Structure</h1>
+					</a>
+					<p><img class="uml" src="../assets/images/uml2.png"></p>
+					<a href="#description" id="description" style="color: inherit; text-decoration: none;">
+						<h1>Description</h1>
+					</a>
+					<p>Designed and implemented to be in full, drop-in replacement compatibility with the native <code>Storage</code> API both
+						interface and behavior-wise, it empowers developers to create namespaced <code>Storage</code> scopes.
+						It allows you to subdivide <code>Storage</code> implementations into smaller groups of <code>Storage</code> units with reduced focus to
+					their smaller scope.</p>
+					<p>Due to its dependency on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy"><code>Proxy</code></a>,
+					instances may only be created via the factory method <code>#create</code>:</p>
+					<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">storage</span><span style="color: #000000">: </span><span style="color: #267F99">Storage</span><span style="color: #000000"> = </span><span style="color: #001080">NamespacedStorage</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">window</span><span style="color: #000000">.</span><span style="color: #001080">localStorage</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;example&#039;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">nestedStorage</span><span style="color: #000000">: </span><span style="color: #267F99">Storage</span><span style="color: #000000"> = </span><span style="color: #001080">NamespacedStorage</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">storage</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;nested&#039;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">deepestStorage</span><span style="color: #000000">: </span><span style="color: #267F99">Storage</span><span style="color: #000000"> = </span><span style="color: #001080">NamespacedStorage</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">storage</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;deepest&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+					<a href="#important-tip" id="important-tip" style="color: inherit; text-decoration: none;">
+						<h1>Important Tip</h1>
+					</a>
+					<p>Despite the contemporary trends with TypeScript on the UI or the Back-End, please, make sure to always depend on
+					interfaces instead of implementations. It will help you keep your software as dynamic and flexible as it can be.</p>
+					<p>Software is meant to be soft. Keep it that way.</p>
+					<a href="#perks" id="perks" style="color: inherit; text-decoration: none;">
+						<h1>Perks</h1>
+					</a>
+					<a href="#get-amp-set-items-aka-crud" id="get-amp-set-items-aka-crud" style="color: inherit; text-decoration: none;">
+						<h2>Get &amp; Set Items (AKA: CRUD)</h2>
+					</a>
+					<p>As per the official <a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage"><code>Storage</code> API</a>, it allows for IO
+					operations both via methods and properties. Take the following example:</p>
+					<a href="#the-following-lines-of-code-all-set-the-same-value-to-the-same-storage-unit" id="the-following-lines-of-code-all-set-the-same-value-to-the-same-storage-unit" style="color: inherit; text-decoration: none;">
+						<h3>The following lines of code all set the same value to the same storage unit</h3>
+					</a>
+					<pre><code class="language-typescript"><span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #001080">cool</span><span style="color: #000000">    = </span><span style="color: #A31515">&#039;It</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s awesome!&#039;</span><span style="color: #000000">;</span>
+<span style="color: #001080">storage</span><span style="color: #000000">[</span><span style="color: #A31515">&#039;cool&#039;</span><span style="color: #000000">] = </span><span style="color: #A31515">&#039;It</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s awesome!&#039;</span><span style="color: #000000">;</span>
+<span style="color: #001080">localStorage</span><span style="color: #000000">[</span><span style="color: #A31515">&#039;example.cool&#039;</span><span style="color: #000000">] = </span><span style="color: #A31515">&#039;It</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s awesome!&#039;</span><span style="color: #000000">;</span>
+<span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #795E26">setItem</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;cool&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;It</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s awesome!&#039;</span><span style="color: #000000">);</span>
+<span style="color: #001080">localStorage</span><span style="color: #000000">.</span><span style="color: #795E26">setItem</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;example.cool&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;It</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s awesome!&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+					<a href="#the-following-lines-of-code-all-return-the-same-value-written-to-the-same-storage-unit" id="the-following-lines-of-code-all-return-the-same-value-written-to-the-same-storage-unit" style="color: inherit; text-decoration: none;">
+						<h3>The following lines of code all return the same value written to the same storage unit</h3>
+					</a>
+					<pre><code class="language-typescript"><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #795E26">getItem</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;cool&#039;</span><span style="color: #000000">));</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #001080">storage</span><span style="color: #000000">.</span><span style="color: #001080">cool</span><span style="color: #000000">);</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #001080">storage</span><span style="color: #000000">[</span><span style="color: #A31515">&#039;cool&#039;</span><span style="color: #000000">]);</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #001080">localStorage</span><span style="color: #000000">.</span><span style="color: #795E26">getItem</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;example.cool&#039;</span><span style="color: #000000">));</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #001080">localStorage</span><span style="color: #000000">[</span><span style="color: #A31515">&#039;example.cool&#039;</span><span style="color: #000000">]);</span>
+</code></pre>
+					<a href="#a-more-practical-example-for-property-accessors" id="a-more-practical-example-for-property-accessors" style="color: inherit; text-decoration: none;">
+						<h3>A more practical example for property accessors:</h3>
+					</a>
+					<pre><code class="language-typescript"><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">TodoItem</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">summary</span><span style="color: #000000">?: </span><span style="color: #267F99">string</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">priority</span><span style="color: #000000">?: </span><span style="color: #267F99">number</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">increasePriority</span><span style="color: #000000">(</span><span style="color: #001080">todoItem</span><span style="color: #000000">: </span><span style="color: #267F99">TodoItem</span><span style="color: #000000">): </span><span style="color: #267F99">void</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">todoItem</span><span style="color: #000000">.</span><span style="color: #001080">priority</span><span style="color: #000000"> = (</span><span style="color: #001080">todoItem</span><span style="color: #000000">.</span><span style="color: #001080">priority</span><span style="color: #000000"> ?? </span><span style="color: #098658">0</span><span style="color: #000000">) + </span><span style="color: #098658">1</span><span style="color: #000000">;</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">todos</span><span style="color: #000000">: </span><span style="color: #267F99">Storage</span><span style="color: #000000"> = </span><span style="color: #001080">NamespacedStorage</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">storage</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;todoItems&#039;</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">todo</span><span style="color: #000000">: </span><span style="color: #267F99">Storage</span><span style="color: #000000"> &amp; </span><span style="color: #267F99">TodoItem</span><span style="color: #000000"> = </span><span style="color: #001080">NamespacedStorage</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">todos</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;item1&#039;</span><span style="color: #000000">);</span>
+<span style="color: #795E26">increasePriority</span><span style="color: #000000">(</span><span style="color: #001080">todo</span><span style="color: #000000">);</span>
+<span style="color: #795E26">increasePriority</span><span style="color: #000000">(</span><span style="color: #001080">todo</span><span style="color: #000000">);</span>
+<span style="color: #795E26">increasePriority</span><span style="color: #000000">(</span><span style="color: #001080">todo</span><span style="color: #000000">);</span>
+<span style="color: #008000">// returns String(&quot;3&quot;)</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">info</span><span style="color: #000000">(</span><span style="color: #001080">localStorage</span><span style="color: #000000">.</span><span style="color: #795E26">getItem</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;example.todoItem.item1.priority&#039;</span><span style="color: #000000">));</span>
+</code></pre>
+					<a href="#scope-reduced-interactions" id="scope-reduced-interactions" style="color: inherit; text-decoration: none;">
+						<h2>Scope-Reduced interactions</h2>
+					</a>
+					<p>A namespaced storage will only execute its methods within its namespace. This implies, that the keys which belong a
+						specific namespace are strongly connected to the given instance. When running <code>clear</code>, <code>key</code>, or getting <code>length</code>,
+					it behaves as expected: all operations &amp; information is restricted to the namespace only.</p>
+				</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-private"><a href="namespacedstorage.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="namespacedstorage.html#keys" class="tsd-kind-icon">keys</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="namespacedstorage.html#namespace" class="tsd-kind-icon">namespace</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="namespacedstorage.html#storage" class="tsd-kind-icon">storage</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="namespacedstorage.html#namespaceseparator" class="tsd-kind-icon">namespace<wbr>Separator</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="namespacedstorage.html#proxyhandler" class="tsd-kind-icon">proxy<wbr>Handler</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="namespacedstorage.html#length" class="tsd-kind-icon">length</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="namespacedstorage.html#clear" class="tsd-kind-icon">clear</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="namespacedstorage.html#getitem" class="tsd-kind-icon">get<wbr>Item</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="namespacedstorage.html#key" class="tsd-kind-icon">key</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="namespacedstorage.html#packnamespacedkey" class="tsd-kind-icon">pack<wbr>Namespaced<wbr>Key</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="namespacedstorage.html#removeitem" class="tsd-kind-icon">remove<wbr>Item</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="namespacedstorage.html#setitem" class="tsd-kind-icon">set<wbr>Item</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="namespacedstorage.html#unpacknamespacedkey" class="tsd-kind-icon">unpack<wbr>Namespaced<wbr>Key</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="namespacedstorage.html#create" class="tsd-kind-icon">create</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Namespaced<wbr>Storage<span class="tsd-signature-symbol">(</span>storage<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Storage</span>, namespace<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, keys<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="namespacedstorage.html" class="tsd-signature-type" data-tsd-kind="Class">NamespacedStorage</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L107">NamespacedStorage.ts:107</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>storage: <span class="tsd-signature-type">Storage</span></h5>
+								</li>
+								<li>
+									<h5>namespace: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>keys: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="namespacedstorage.html" class="tsd-signature-type" data-tsd-kind="Class">NamespacedStorage</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="keys" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> keys</h3>
+					<div class="tsd-signature tsd-kind-icon">keys<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L105">NamespacedStorage.ts:105</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="namespace" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> namespace</h3>
+					<div class="tsd-signature tsd-kind-icon">namespace<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L106">NamespacedStorage.ts:106</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="storage" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> storage</h3>
+					<div class="tsd-signature tsd-kind-icon">storage<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Storage</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L107">NamespacedStorage.ts:107</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="namespaceseparator" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagStatic">Static</span> namespace<wbr>Separator</h3>
+					<div class="tsd-signature tsd-kind-icon">namespace<wbr>Separator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;.&#x27;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L103">NamespacedStorage.ts:103</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="proxyhandler" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagStatic">Static</span> proxy<wbr>Handler</h3>
+					<div class="tsd-signature tsd-kind-icon">proxy<wbr>Handler<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ProxyHandler</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Storage</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L104">NamespacedStorage.ts:104</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="length" class="tsd-anchor"></a>
+					<h3>length</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> length<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L122">NamespacedStorage.ts:122</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Tells the number of entries within the given <code>NamespacedStorage</code>.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>1.0.0</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>1.0.0</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>Number of entries within the namespace.</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="clear" class="tsd-anchor"></a>
+					<h3>clear</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">clear<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L153">NamespacedStorage.ts:153</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Removes all storage entries keyed to belong to the current <code>NamespacedStorage</code>.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>1.0.0</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>1.0.0</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getitem" class="tsd-anchor"></a>
+					<h3>get<wbr>Item</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Item<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L165">NamespacedStorage.ts:165</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the queried entry within the encapsulated namespace.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>1.0.0</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>1.0.0</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="key" class="tsd-anchor"></a>
+					<h3>key</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L176">NamespacedStorage.ts:176</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the <code>index</code>th key encapsulated by the <code>NamespacedStorage</code>.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>1.0.0</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>1.0.0</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>index: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="packnamespacedkey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> pack<wbr>Namespaced<wbr>Key</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">pack<wbr>Namespaced<wbr>Key<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L214">NamespacedStorage.ts:214</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="removeitem" class="tsd-anchor"></a>
+					<h3>remove<wbr>Item</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Item<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L188">NamespacedStorage.ts:188</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Removes the item stored under the given <code>key</code> within the encapsulated namespace.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>1.0.0</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>1.0.0</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setitem" class="tsd-anchor"></a>
+					<h3>set<wbr>Item</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Item<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L201">NamespacedStorage.ts:201</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the <code>value</code> under the given <code>key</code> within the encapsulated namespace.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>1.0.0</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>1.0.0</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>value: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="unpacknamespacedkey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> unpack<wbr>Namespaced<wbr>Key</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">unpack<wbr>Namespaced<wbr>Key<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L207">NamespacedStorage.ts:207</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="create" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> create</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>storage<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Storage</span>, namespace<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Storage</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/21GramConsulting/storage-api/blob/6405645/src/main/NamespacedStorage.ts#L134">NamespacedStorage.ts:134</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a new <code>NamespacedStorage</code> instance with the appropriate <code>Proxy</code> handler in place.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>1.0.0</p>
+									</dd>
+									<dt>since</dt>
+									<dd><p>1.0.0</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>storage: <span class="tsd-signature-type">Storage</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The <code>Storage</code> object to encapsulate. Any <code>Storage</code> implementation.</p>
+									</div>
+								</li>
+								<li>
+									<h5>namespace: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The string to use as a namespace for the newly created <code>NamespacedStorage</code>.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Storage</span></h4>
+							<p>The newly created namespaced storage object.</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
+						<a href="namespacedstorage.html" class="tsd-kind-icon">Namespaced<wbr>Storage</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
+								<a href="namespacedstorage.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="namespacedstorage.html#keys" class="tsd-kind-icon">keys</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="namespacedstorage.html#namespace" class="tsd-kind-icon">namespace</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="namespacedstorage.html#storage" class="tsd-kind-icon">storage</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="namespacedstorage.html#namespaceseparator" class="tsd-kind-icon">namespace<wbr>Separator</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="namespacedstorage.html#proxyhandler" class="tsd-kind-icon">proxy<wbr>Handler</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="namespacedstorage.html#length" class="tsd-kind-icon">length</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="namespacedstorage.html#clear" class="tsd-kind-icon">clear</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="namespacedstorage.html#getitem" class="tsd-kind-icon">get<wbr>Item</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="namespacedstorage.html#key" class="tsd-kind-icon">key</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="namespacedstorage.html#packnamespacedkey" class="tsd-kind-icon">pack<wbr>Namespaced<wbr>Key</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="namespacedstorage.html#removeitem" class="tsd-kind-icon">remove<wbr>Item</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="namespacedstorage.html#setitem" class="tsd-kind-icon">set<wbr>Item</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="namespacedstorage.html#unpacknamespacedkey" class="tsd-kind-icon">unpack<wbr>Namespaced<wbr>Key</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="namespacedstorage.html#create" class="tsd-kind-icon">create</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="storageproxyhandler.html" class="tsd-kind-icon">Storage<wbr>Proxy<wbr>Handler</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

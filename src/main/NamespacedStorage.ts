@@ -137,12 +137,17 @@ export class NamespacedStorage implements Storage {
     while (keyIndex--) {
       const key: string | null = storage.key(keyIndex);
       if (!key) continue;
-      if (key.startsWith(`${namespace}.`)) keys.push(key);
+      if (key.startsWith(`${namespace}${NamespacedStorage.namespaceSeparator}`)) keys.push(NamespacedStorage.unpackNamespacedKey(key, namespace));
     }
     return new Proxy(
       new NamespacedStorage(storage, namespace, keys),
       this.proxyHandler,
     );
+  }
+
+  private static unpackNamespacedKey(key: string, namespace: string) {
+    const indexOfFirstLetterWithoutNamespace = `${namespace}${NamespacedStorage.namespaceSeparator}`.length;
+    return key.substring(indexOfFirstLetterWithoutNamespace)
   }
 
   /**

@@ -3,6 +3,11 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "artifact/lib",
+    "declaration": true,
+    "target": "ES6",
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
     "lib": [
       "dom"
     ]
